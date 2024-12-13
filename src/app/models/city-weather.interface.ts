@@ -1,8 +1,6 @@
 export interface ICity {
-  id: number;
-  name: string;
-  state?: string;
   country: string;
+  name: string;
   lat: string;
   lng: string;
 }
