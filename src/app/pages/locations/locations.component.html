@@ -1,0 +1,131 @@
+@if (weatherInfo) {
+  <div class="relative overflow-hidden main h-screen">
+    <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-24">
+      <div class="text-center">
+        <h1 class="text-4xl sm:text-6xl font-bold text-violet-800 dark:text-violet-200">
+          {{weatherInfo.name}}
+        </h1>
+        <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+          <div class="max-w-4xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-6 lg:gap-12">
+              <div class="space-y-6 lg:space-y-10">
+                @if (weatherInfo.main) {
+                  <div class="flex">
+                    <p class="flex-shrink-0 mt-2 h-8 w-8 text-violet-800 dark:text-white text-4xl">🌡️</p>
+                    <div class="ml-5 sm:ml-8">
+                      <h3 class="text-base sm:text-lg font-semibold text-violet-800 dark:text-violet-200">
+                        Temperature
+                      </h3>
+                      <p class="mt-1 text-violet-600 dark:text-violet-400 text-left">
+                        {{weatherInfo.main.temp - 273.15}}°
+                      </p>
+                    </div>
+                  </div>
+                }
+                @if (weatherInfo.main) {
+                  <div class="flex">
+                    <p class="flex-shrink-0 mt-2 h-8 w-8 text-violet-800 dark:text-white text-4xl">🌡️</p>
+                    <div class="ml-5 sm:ml-8">
+                      <h3 class="text-base sm:text-lg font-semibold text-violet-800 dark:text-violet-200">
+                        Temperature (feels like)
+                      </h3>
+                      <p class="mt-1 text-violet-600 dark:text-violet-400 text-left">
+                        {{weatherInfo.main.feels_like - 273.15 | number}}°
+                      </p>
+                    </div>
+                  </div>
+                }
+                @if (weatherInfo.wind) {
+                  <div class="flex">
+                    <p class="flex-shrink-0 mt-2 h-8 w-8 text-violet-800 dark:text-white text-4xl">💨</p>
+                    <div class="ml-5 sm:ml-8">
+                      <h3 class="text-base sm:text-lg font-semibold text-violet-800 dark:text-violet-200">
+                        Wind Speed
+                      </h3>
+                      <p class="mt-1 text-violet-600 dark:text-violet-400 text-left">
+                        {{weatherInfo.wind.speed}} m/s
+                      </p>
+                    </div>
+                  </div>
+                }
+              </div>
+              <div class="space-y-6 lg:space-y-10">
+                @if (weatherInfo.wind) {
+                  <div class="flex">
+                    <p class="flex-shrink-0 mt-2 h-8 w-8 text-violet-800 dark:text-white text-4xl">🧭</p>
+                    <div class="ml-5 sm:ml-8">
+                      <h3 class="text-base sm:text-lg font-semibold text-violet-800 dark:text-violet-200">
+                        Wind Direction
+                      </h3>
+                      <p class="mt-1 text-violet-600 dark:text-violet-400 text-left">
+                        {{weatherInfo.wind.deg}}
+                      </p>
+                    </div>
+                  </div>
+                }
+                @if (weatherInfo.main) {
+                  <div class="flex">
+                    <p class="flex-shrink-0 mt-2 h-8 w-8 text-violet-800 dark:text-white text-4xl">💧</p>
+                    <div class="ml-5 sm:ml-8">
+                      <h3 class="text-base sm:text-lg font-semibold text-violet-800 dark:text-violet-200">
+                        Humidity
+                      </h3>
+                      <p class="mt-1 text-violet-600 dark:text-violet-400 text-left">
+                        {{weatherInfo.main.humidity}}%
+                      </p>
+                    </div>
+                  </div>
+                }
+                @if (weatherInfo.weather) {
+                  <div class="flex">
+                    <img [src]="'https://openweathermap.org/img/wn/' +weatherInfo.weather[0].icon + '@2x.png'"
+                         class="flex-shrink-0 mt-2 w-8 text-violet-800 dark:text-white h-12"  alt=""/>
+                    <div class="ml-5 sm:ml-8">
+                      <h3 class="text-base sm:text-lg font-semibold text-violet-800 dark:text-violet-200">
+                        Weather Type
+                      </h3>
+                      <p class="mt-1 text-violet-600 dark:text-violet-400 text-left">
+                        {{weatherInfo.weather[0].description}}
+                      </p>
+                    </div>
+                  </div>
+                }
+              </div>
+            </div>
+            @if (toast) {
+              <div
+                class="max-w-xs bg-white border rounded-md shadow-lg dark:bg-gray-800 dark:border-gray-700 absolute bottom-0 left-1/2 -translate-x-1/2"
+                role="alert">
+                <div class="flex p-4">
+                  <div class="flex-shrink-0">
+                    <svg class="h-4 w-4 text-blue-500 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                         fill="currentColor" viewBox="0 0 16 16">
+                      <path
+                        d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <p class="text-sm text-gray-700 dark:text-gray-400">
+                      {{toast.message}}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            }
+            <button type="button"
+                    class="w-full py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800 mt-4"
+                    (click)="favourite()">
+              Add to Favourites
+            </button>
+            <button type="button"
+                    class="w-full py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800 mt-4"
+                    (click)="back()">
+              Back to Search
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+}
+
