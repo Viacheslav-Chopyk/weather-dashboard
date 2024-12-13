@@ -17,7 +17,7 @@
                         Temperature
                       </h3>
                       <p class="mt-1 text-violet-600 dark:text-violet-400 text-left">
-                        {{weatherInfo.main.temp - 273.15}}°
+                        {{weatherInfo.main.temp - 273.15 | number}}°
                       </p>
                     </div>
                   </div>
@@ -92,7 +92,7 @@
                 }
               </div>
             </div>
-            @if (toast) {
+            @if (toast.show) {
               <div
                 class="max-w-xs bg-white border rounded-md shadow-lg dark:bg-gray-800 dark:border-gray-700 absolute bottom-0 left-1/2 -translate-x-1/2"
                 role="alert">
